@@ -1,0 +1,8 @@
+name: what
+on: workflow_call
+jobs: 
+    eine:
+        runs-on: ubuntu-latest
+        steps:
+            - name: zwei
+              run: echo "what"
