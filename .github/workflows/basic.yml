@@ -1,8 +1,21 @@
-name: what
-on: workflow_call
+name: reusable wf
+on: 
+    workflow_call:
+        inputs:
+            artifact-name:
+              description: the name
+              required: false
+              default: dist
+              type: string
 jobs: 
-    eine:
+    reuseableJob:
         runs-on: ubuntu-latest
         steps:
-            - name: zwei
+            - name: get Code
+              uses: actions/download-artifact@v3
+              with:
+                name: ${{ inputs.artifact-name }}
+            - name: list files
+              run: ls 
+            - name: What
               run: echo "what"
