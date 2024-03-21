@@ -10,16 +10,18 @@ jobs:
       - name: Get code
         uses: actions/checkout@v3
       - name: Cache dependencies
-        id: cache
+        id: didu
         uses: actions/cache@v3
         with:
           path: node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.didu.outputs.cache-hit != 'true'
         run: npm ci
       - name: Lint code
         run: npm run lint
+      - name: pretty print
+        run: echo "${{ steps.didu.outputs.cache-hit }}"
   test:
     runs-on: ubuntu-latest
     steps:
