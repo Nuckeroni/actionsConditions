@@ -71,6 +71,12 @@ jobs:
     uses: ./.github/workflows/basic.yml 
     with: 
       artifact-dame: dist-files
+  after-deploy:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: whatever
+        run: echo "${{needs.deploy.outputs.result}}"
   report:
     needs: [lint, deploy]
     if: failure()

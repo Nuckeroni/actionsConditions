@@ -7,8 +7,16 @@ on:
               required: false
               default: dist
               type: string
+        outputs:
+            result:
+              description: the result of the operation
+              value: ${{jobs.reuseableJob.outputs.outcome}}
+              
+
 jobs: 
     reuseableJob:
+        outputs:
+            outcome: ${{steps.set-results.outputs.step-resultPP}}
         runs-on: ubuntu-latest
         steps:
             - name: get Code
@@ -19,3 +27,6 @@ jobs:
               run: ls 
             - name: What
               run: echo "what"
+            - name: set result output
+              id: set-results
+              run: echo "::set-output name=step-resultPP::success"
