@@ -69,6 +69,8 @@ jobs:
   deploy:
     needs: build
     uses: ./.github/workflows/basic.yml 
+    with: 
+      artifact-dame: dist-files
   report:
     needs: [lint, deploy]
     if: failure()
